@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Campaigns</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">NayePankh</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/donor_profile/">Profile</a>
+                <a href="/logout/">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="campaigns-section">
+        <div class="container">
+            <h1>Donate to a Cause</h1>
+            <p>Help make a difference by donating to these amazing campaigns.</p>
+
+            <div class="campaigns">
+                {% for campaign in campaigns %}
+                    <div class="campaign-card">
+                        <img src="{{ campaign.image.url }}" alt="{{ campaign.name }}" class="campaign-image">
+                        <div class="campaign-info">
+                            <h2>{{ campaign.name }}</h2>
+                            <p>{{ campaign.description|truncatewords:30 }}</p>
+                            <p class="campaign-goal">Goal: ${{ campaign.goal }}</p>
+                            <a href="/donate/{{ campaign.id }}/" class="donate-btn">Donate Now</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 NayePankh. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
